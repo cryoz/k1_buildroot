@@ -5,7 +5,7 @@ This is an *unofficial* mod to run Moonraker, custom Klipper, Mainsail & Fluidd 
 
 Klipper Mod for the K1 is designed to be fully removable and not break any functions of the stock software.
 
-The mod is adapted for the K1 from the great work done by the [Flashflorge Mod Project](https://github.com/xblax/flashforge_ad5m_klipper_mod).
+The mod is adapted for the K1 from the great work done by the [Flashforge Mod Project](https://github.com/xblax/flashforge_ad5m_klipper_mod).
 
 > [!CAUTION]
 > *If you want to install this mod to your K1 (Max) then be aware that you risk losing your warranty or damaging the printer. Proceed at your own risk if you want to try this mod!*

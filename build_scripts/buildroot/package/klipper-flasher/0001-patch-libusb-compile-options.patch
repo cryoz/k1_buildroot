@@ -1,0 +1,13 @@
+diff --git a/lib/rp2040_flash/Makefile b/lib/rp2040_flash/Makefile
+index d98a72d95..21b20ab18 100644
+--- a/lib/rp2040_flash/Makefile
++++ b/lib/rp2040_flash/Makefile
+@@ -1,6 +1,6 @@
+ CC=gcc
+-CFLAGS=-c -Wall -ggdb
+-LDFALGS=
++override CFLAGS=-c -Wall -ggdb
++override LDFLAGS=
+ SOURCES=main.c picoboot_connection.c
+ OBJECTS=$(SOURCES:.c=.o)
+ LIBS=`pkg-config libusb-1.0 --libs`

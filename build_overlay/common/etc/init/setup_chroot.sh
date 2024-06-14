@@ -33,6 +33,9 @@ setup_static_data /etc/hostname
 # setup_static_data /etc/network/interfaces
 setup_static_data /etc/wpa_supplicant.conf
 
+# use wifi settings from existing setup
+echo -e "autoscan=periodic:30\n$(cat /mnt/data/wpa_supplicant.conf)" > /etc/wpa_supplicant.conf
+
 # keep dropbear keys (that is a symlink to /var/run/dropbear originally)
 rm -f /etc/dropbear
 mkdir -p /etc/dropbear

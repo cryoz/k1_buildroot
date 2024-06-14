@@ -1,0 +1,7 @@
+config BR2_PACKAGE_KLIPPER_FLASHER
+	bool "klipper_flasher"
+    select BR2_PACKAGE_LIBUSB
+	help
+	  Build and install klipper flasher
+
+	  https://github.com/Klipper3d/klipper
