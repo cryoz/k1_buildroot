@@ -92,3 +92,9 @@ Due to the beta stage of Klipper Mod the documentation is not fully-completed. T
 - [Camera](docs/CAMERA.md)
 - [USB](docs/USB.md)
 - [Build Instructions](docs/BUILDING.md)
+
+## Credits
+
+- [K1-Klipper](https://github.com/K1-Klipper) - first K1 klipper mainline
+- [Cryoz](https://github.com/cryoz) - mcu flash
+- [pellcorp](https://github.com/pellcorp) - Simple AF K1
