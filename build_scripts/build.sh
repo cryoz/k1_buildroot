@@ -203,7 +203,7 @@ checksums()
 }
 
 cd $GIT_ROOT
-GIT_VERSION=$(git describe)
+GIT_VERSION=$(git describe --tags)
 
 # run command
 $@
