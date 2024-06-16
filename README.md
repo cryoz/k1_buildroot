@@ -43,7 +43,7 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 | More performant ** | ?? |
 
 
-\* Guppy Mod is using the BTT Eddy Klipper branch until the Eddy features are merged into mainline.  
+\* Guppy Mod is using the mainline + a PR for rapid bed mesh scan. Will switch to mainline once rapid bed mesh scan is merged.
 \** Python 3.11.8 is *FASTER* than 3.8.2 (Faster Klipper/Moonraker). Since Guppy Mod also do not install any bloated software, it uses significantly less memory by default. On a fresh boot, Guppy Mod shows 36% used System memory in fluidd compared to 46% used by stock.
 
 ## Roadmap
@@ -79,11 +79,11 @@ Assuming firmware already flashed on the Eddy.
 5. `PROBE_EDDY_CURRENT_CALIBRATE CHIP=btt_eddy` (Triggers manual z offse calibration - paper test)
 6. `SAVE_CONFIG`
 
-For detail BTT Eddy setup refer to their work-in-progress [guide](https://github.com/bigtreetech/Eddy).
+Mainline currently does not support temperature calibration. For detail BTT Eddy setup refer to their work-in-progress [guide](https://github.com/bigtreetech/Eddy).
 
 ## Documentation
 
-Due to the beta stage of Klipper Mod the documentation is not fully-completed. The documentation is split into several topics:
+Due to the alpha stage of Klipper Mod the documentation is not fully-completed. The documentation is split into several topics:
 
 - [Install](docs/INSTALL.md): How to install Klipper Mod
 - [Uninstall](docs/UNINSTALL.md): Uninstall Klipper Mod
