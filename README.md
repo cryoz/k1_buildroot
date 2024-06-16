@@ -68,16 +68,10 @@ You are welcome to participate int the [GitHub Discussions](https://github.com/b
 
 This mod currently abandons PRTouch and expects a probe to configured. By default, it uses the BTT Eddy probe configuration. Microprobe and BLTouch configurations are also available and can be enabled/disabled by editting `printer.cfg`. For probe that requires calibration, follow their respective manual to complete the initial collabration.
 
-### BTT Eddy (TLDR)
+### BTT Eddy Guide
 
-Assuming firmware already flashed on the Eddy.
-
-1. With Eddy ~20mm above bed, run `LDC_CALIBRATE_DRIVE_CURRENT CHIP=btt_eddy`
-2. `SAVE_CONFIG`
-3. `G28 X Y` (Home X Y)
-4. `G0 X125 Y125 F6000` (Center Nozzle)
-5. `PROBE_EDDY_CURRENT_CALIBRATE CHIP=btt_eddy` (Triggers manual z offse calibration - paper test)
-6. `SAVE_CONFIG`
+Follow the [K1 BTT Eddy Guide](https://ballaswag.github.io/blog/creality-k1-btt-eddy-guide/) to configure the Eddy using this mod.
+- Mod now supports flashing the BTT Eddy right from the K1.
 
 Mainline currently does not support temperature calibration. For detail BTT Eddy setup refer to their work-in-progress [guide](https://github.com/bigtreetech/Eddy).
 
