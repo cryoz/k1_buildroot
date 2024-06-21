@@ -174,10 +174,8 @@ package_variant() {
 	rm -f "$br_chroot"
 	xz -cT`nproc` "$br_image" > "$br_chroot"
 	package_name="K1-KlipperMod-$GIT_VERSION-$variant.tgz"
-	package_name_pro="K1Max-KlipperMod-$GIT_VERSION-$variant.tgz"
 	mkdir -p $BUILD_PACKAGE
 	tar -cf "$BUILD_PACKAGE/$package_name" -C "$GIT_ROOT/device_files/install" . -C "$br_builddir/images/" ./chroot.tar.xz
-	cp "$BUILD_PACKAGE/$package_name" "$BUILD_PACKAGE/$package_name_pro"
 	log_info "variant-$variant: created $package_name"
 }
 

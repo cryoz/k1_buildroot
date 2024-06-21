@@ -17,7 +17,7 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 
 ## Feature Overview
 
-- [Klipper](https://www.klipper3d.org/) (Currently on the BTT Eddy branch) ‒ with improved configuration and default macros
+- [Klipper](https://www.klipper3d.org/) ‒ with improved configuration and default macros
 - [Moonraker](https://github.com/Arksine/moonraker) on port 7125
 - [Mainsail](https://docs.mainsail.xyz/) on port 4000
 - [Fluidd](https://docs.fluidd.xyz/) on port 4001
@@ -33,18 +33,17 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 ## Guppy Mod vs K1 Stock
 | Guppy Mod | Stock |
 |-----------|-------|
-| Mainline Klipper * | Creality Klipper |
+| Mainline Klipper | Creality Klipper |
 | Buildroot 2024 | Buildroot 2020 |
 | Python 3.11.8  | Python 3.8.2 |
 | ustreamer  | mjpeg-streamer |
 | Guppy Screen | Creality display-server |
 | Open source | Source?
 | No bloatware | Creality services |
-| More performant ** | ?? |
+| More performant * | ?? |
 
 
-\* Guppy Mod is using the mainline + a PR for rapid bed mesh scan. Will switch to mainline once rapid bed mesh scan is merged.
-\** Python 3.11.8 is *FASTER* than 3.8.2 (Faster Klipper/Moonraker). Since Guppy Mod also do not install any bloated software, it uses significantly less memory by default. On a fresh boot, Guppy Mod shows 36% used System memory in fluidd compared to 46% used by stock.
+\* Python 3.11.8 is *FASTER* than 3.8.2 (Faster Klipper/Moonraker). Since Guppy Mod also do not install any bloated software, it uses significantly less memory by default. On a fresh boot, Guppy Mod shows 36% used System memory in fluidd compared to 46% used by stock.
 
 ## Roadmap
 
