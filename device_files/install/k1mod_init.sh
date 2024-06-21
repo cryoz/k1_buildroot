@@ -74,6 +74,45 @@ do_setup()
     xz -dc $WORK_DIR/chroot.tar.xz | tar -xf - -C $CHROOT_DIR
     sync
 
+    ##############################
+    # which k1 are you?
+    ##############################
+
+    PRINTER_CONF_DIR="${CHROOT_DIR}//root/printer_data/config"
+    machine_info=$(tr -d '\0' </dev/mmcblk0p2)
+    if [[ $machine_info == *"CR-K1;CR4CU220812S12;;;;;"* ]]; then
+	echo "Identified machine as K1. Configuring printer.cfg for a K1."
+	cp $PRINTER_CONF_DIR/k1/*.cfg $PRINTER_CONF_DIR/
+	rm $PRINTER_CONF_DIR/printer_k1c.cfg $PRINTER_CONF_DIR/printer_variant1.cfg
+
+    elif [[ $machine_info == *"CR-K1;CR4CU220812S12;;;1;;"* ]]; then
+	echo "Identified machine as K1 New Variant. Configuring printer.cfg for a K1 New Variant."
+	cp $PRINTER_CONF_DIR/k1/*.cfg $PRINTER_CONF_DIR/
+	mv $PRINTER_CONF_DIR/printer_variant1.cfg $PRINTER_CONF_DIR/printer.cfg
+	rm $PRINTER_CONF_DIR/printer_k1c.cfg
+
+    elif [[ $machine_info == *"CR-K1 Max;CR4CU220812S12;;;;;"* ]]; then
+	echo "Identified machine as K1 Max. Configuring printer.cfg for a K1 Max."
+	cp $PRINTER_CONF_DIR/k1max/*.cfg $PRINTER_CONF_DIR/
+	rm $PRINTER_CONF_DIR/printer_variant1.cfg
+
+    elif [[ $machine_info == *"CR-K1 Max;CR4CU220812S12;;;1;;"* ]]; then
+	echo "Identified machine as K1 Max New Variant. Configuring printer.cfg for a K1 Max New Variant."
+	cp $PRINTER_CONF_DIR/k1max/*.cfg $PRINTER_CONF_DIR/
+	mv $PRINTER_CONF_DIR/printer_variant1.cfg  $PRINTER_CONF_DIR/printer.cfg
+
+    elif [[ $machine_info == *"K1C;CR4CU220812S12;;;;;"* ]]; then
+	echo "Identified machine as K1C. Configuring printer.cfg for a K1C."
+	cp $PRINTER_CONF_DIR/k1/*.cfg $PRINTER_CONF_DIR/
+	mv $PRINTER_CONF_DIR/printer_k1c.cfg $PRINTER_CONF_DIR/printer.cfg
+	rm $PRINTER_CONF_DIR/printer_variant1.cfg
+
+    else
+	echo "Failed to idenity K1 model. Exiting.."
+	exit 1
+    fi
+
+
     # do intial setup
     $CHROOT_DIR/etc/init/S00klipper_mod setup
     sync
