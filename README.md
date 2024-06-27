@@ -16,7 +16,8 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 > *This mod currently breaks PRTouch and expects users to replace it with a probe (Eddy, BLTouch, Microprobe)*
 
 
-![Discord Banner 2](https://discord.com/api/guilds/1184542740856447156/widget.png?style=banner2)
+[![Guppy Platform Discord](https://discord.com/api/guilds/1184542740856447156/widget.png?style=banner2)](https://discord.gg/BpGRPkvtQP)
+
 
 ## Install
 Run via SSH on your K1 (C/Max)
@@ -62,7 +63,7 @@ sh -c "$(wget --no-check-certificate -qO - https://raw.githubusercontent.com/bal
 - Network access: Ethernet LAN (K1 Max) [iwd](https://iwd.wiki.kernel.org/)
 - LCD backlight
 
-All features of the mod run directly on the printer built-in system (X2000E). No additional hardware is required.
+All features of the mod run directly on the printer built-in system (X2000E).
 
 ## Getting Started
 
