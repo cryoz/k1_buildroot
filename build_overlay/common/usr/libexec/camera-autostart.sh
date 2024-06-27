@@ -3,21 +3,26 @@
 # Automatically start/stop ustreamer for camera livestream via http
 #
 
-CAMERA_DEVNAME=video4
 CAMERA_SUBSYSTEM=video4linux
 CAMERA_MIN_X_RES=1280
-HTTP_PORT=8080
+DEFAULT_PORT=8080
 
 TAG="camera-autostart"
-PID_FILE=/run/ustreamer.pid
+PID_FILE=/run/ustreamer-"$DEVNAME".pid
 
 start() {
     # check supported formats
     if ! v4l2-ctl -d /dev/$DEVNAME --list-formats | grep "MJPG"
     then
         logger -t $TAG "camera /dev/$DEVNAME does not support MJPG"
-        exit 0
+        exit 1
     fi
+
+    if [ ! -z "$PORT" ]; then
+	DEFAULT_PORT=$PORT
+    fi
+
+    logger -t $TAG "starting camera /dev/$DEVNAME on port $DEFAULT_PORT with pidfile $PID_FILE"
 
     # get resolutions, sort so that lowest resolution comes first in list
     # choose first resolution that is greater or equal CAMERA_MIN_X_RES, or the highest supported resolution else
@@ -39,7 +44,7 @@ start() {
         fi
     done
 
-    start-stop-daemon -S -b -m -p $PID_FILE --exec ustreamer -- -d /dev/$DEVNAME -r $resolution -m MJPEG --device-timeout=2 -w 1 -I MMAP -c HW -s* -p 8080
+    start-stop-daemon -S -b -m -p $PID_FILE --exec ustreamer -- -d /dev/$DEVNAME -r $resolution -m MJPEG --device-timeout=2 -w 1 -I MMAP -c HW -s* -p $DEFAULT_PORT --allow-origin=\*
     [ $? -eq 0 ] && logger -t $TAG "started ustreamer for /dev/$DEVNAME with res $resolution" || logger -t $TAG "failed to start ustreamer"
 }
 
@@ -48,21 +53,18 @@ stop() {
     [ $? -eq 0 ] && logger -t $TAG "stopped ustreamer for /dev/$DEVNAME" || logger -t $TAG "failed to stop ustreamer"
 }
 
-if [ "$CAMERA_DEVNAME" == "$DEVNAME" ]
-then
-    logger -t $TAG "received ACTION=$ACTION /dev/$DEVNAME"
+logger -t $TAG "received ACTION=$ACTION /dev/$DEVNAME"
 
-    case "$ACTION" in
-        add)
-            start
-            ;;
-        remove)
-            stop
-            ;;
-        *)
-            logger -t $TAG "ACTION=$ACTION unsupported"
-            exit 1
-    esac
-fi
+case "$ACTION" in
+    add)
+        start
+        ;;
+    remove)
+        stop
+        ;;
+    *)
+        logger -t $TAG "ACTION=$ACTION unsupported"
+        exit 1
+esac
 
 exit $?

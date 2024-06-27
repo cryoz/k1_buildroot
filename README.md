@@ -15,6 +15,16 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 > [!CAUTION]
 > *This mod currently breaks PRTouch and expects users to replace it with a probe (Eddy, BLTouch, Microprobe)*
 
+
+![Discord Banner 2](https://discord.com/api/guilds/1184542740856447156/widget.png?style=banner2)
+
+## Install
+Run via SSH on your K1 (C/Max)
+
+```
+sh -c "$(wget --no-check-certificate -qO - https://raw.githubusercontent.com/ballaswag/creality_k1_klipper_mod/master/install.sh)"
+```
+
 ## Feature Overview
 
 - [Klipper](https://www.klipper3d.org/) ‒ with improved configuration and default macros
@@ -22,7 +32,7 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 - [Mainsail](https://docs.mainsail.xyz/) on port 4000
 - [Fluidd](https://docs.fluidd.xyz/) on port 4001
 - [Guppyscreen](https://github.com/ballaswag/guppyscreen) ‒ preview build variant
-- Camera streaming via [ustreamer](https://github.com/pikvm/ustreamer) on port 8080
+- Auto cameras streaming setup via [ustreamer](https://github.com/pikvm/ustreamer) on port 8080-8083
 - [Moonraker-timelapse](https://github.com/mainsail-crew/moonraker-timelapse) support
 - Network access: WiFi WPA Supplicant
 - [Buildroot](https://buildroot.org/) 2024.02.2 compared to stock 2020.02.1 (4 years newer)
@@ -31,17 +41,18 @@ The mod is adapted for the K1 from the great work done by the [Flashforge Mod Pr
 - "Dual boot" with stock K1 software
 
 ## Guppy Mod vs K1 Stock
+
 | Guppy Mod | Stock |
 |-----------|-------|
 | Mainline Klipper | Creality Klipper |
 | Buildroot 2024 | Buildroot 2020 |
 | Python 3.11.8  | Python 3.8.2 |
 | ustreamer  | mjpeg-streamer |
+| multi-camera support  | ? |
 | Guppy Screen | Creality display-server |
-| Open source | Source?
+| Open source | Source? |
 | No bloatware | Creality services |
 | More performant * | ?? |
-
 
 \* Python 3.11.8 is *FASTER* than 3.8.2 (Faster Klipper/Moonraker). Since Guppy Mod also do not install any bloated software, it uses significantly less memory by default. On a fresh boot, Guppy Mod shows 36% used System memory in fluidd compared to 46% used by stock.
 

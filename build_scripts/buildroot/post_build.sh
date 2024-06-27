@@ -80,12 +80,6 @@ fi
 cp -r klippy docs config README.md COPYING $TARGET_ROOT/root/printer_software/klipper/
 rm k1-klipper.patch
 
-cp $BUILD_SCRIPTS/components/klipper/linux_mcu.config ./.config
-CROSS_PREFIX=mipsel-buildroot-linux-gnu- make
-
-cp out/klipper.elf $TARGET_ROOT/usr/bin/klipper_mcu
-rm -rf .config out
-
 create_version ./ > $TARGET_ROOT/root/printer_software/klipper/klippy/.version
 popd
 

@@ -7,6 +7,9 @@ WORK_DIR="$(pwd)"
 MACHINE=$1
 PID=$2
 
+green=`echo "\033[01;32m"`
+white=`echo "\033[m"`
+
 # error handling
 error_handler() {
   # xzcat $WORK_DIR/img/install_fail_error.img.xz > /dev/fb0
@@ -77,35 +80,38 @@ do_setup()
     ##############################
     # which k1 are you?
     ##############################
-    PRINTER_CONF_DIR="${CHROOT_DIR}//root/printer_data/config"
-    machine_info=$(tr -d '\0' </dev/mmcblk0p2)
+    PRINTER_CONF_DIR="${CHROOT_DIR}/root/printer_data/config"
+    model=$(/usr/bin/get_sn_mac.sh model)
+    board=$(/usr/bin/get_sn_mac.sh board)
+    structure=$(/usr/bin/get_sn_mac.sh structure_version || echo "0")
+    machine_info="$model;$board;$structure"
     case "$machine_info" in
-	*"CR-K1;CR4CU220812S12;;;;;"*)
-	    echo "Identified machine as K1. Configuring printer.cfg for a K1."
+	"CR-K1;CR4CU220812S12;0")
+	    printf "${green}Identified machine as K1. Configuring printer.cfg for a K1. ${white}\n"
 	    cp $PRINTER_CONF_DIR/k1/*.cfg $PRINTER_CONF_DIR/
 	    rm $PRINTER_CONF_DIR/printer_k1c.cfg $PRINTER_CONF_DIR/printer_variant1.cfg
 	    ;;
 
-	*"CR-K1;CR4CU220812S12;;;1;;"*)
-	    echo "Identified machine as K1 New Variant. Configuring printer.cfg for a K1 New Variant."
+	"CR-K1;CR4CU220812S12;1")
+	    printf "${green}Identified machine as K1 New Variant. Configuring printer.cfg for a K1 New Variant. ${white}\n"
 	    cp $PRINTER_CONF_DIR/k1/*.cfg $PRINTER_CONF_DIR/
 	    mv $PRINTER_CONF_DIR/printer_variant1.cfg $PRINTER_CONF_DIR/printer.cfg
 	    rm $PRINTER_CONF_DIR/printer_k1c.cfg
 	    ;;
 
-	*"CR-K1 Max;CR4CU220812S12;;;;;"*)
-	    echo "Identified machine as K1 Max. Configuring printer.cfg for a K1 Max."
+	"CR-K1 Max;CR4CU220812S12;0")
+	    printf "${green}Identified machine as K1 Max. Configuring printer.cfg for a K1 Max. ${white}\n"
 	    cp $PRINTER_CONF_DIR/k1max/*.cfg $PRINTER_CONF_DIR/
 	    rm $PRINTER_CONF_DIR/printer_variant1.cfg
 	    ;;
-	*"CR-K1 Max;CR4CU220812S12;;;1;;"*)
-	    echo "Identified machine as K1 Max New Variant. Configuring printer.cfg for a K1 Max New Variant."
+	"CR-K1 Max;CR4CU220812S12;1")
+	    printf "${green}Identified machine as K1 Max New Variant. Configuring printer.cfg for a K1 Max New Variant. ${white}\n"
 	    cp $PRINTER_CONF_DIR/k1max/*.cfg $PRINTER_CONF_DIR/
 	    mv $PRINTER_CONF_DIR/printer_variant1.cfg  $PRINTER_CONF_DIR/printer.cfg
 	    ;;
 
-	*"K1C;CR4CU220812S12;;;;;"*)
-	    echo "Identified machine as K1C. Configuring printer.cfg for a K1C."
+	*"K1C;CR4CU220812S12;0")
+	    printf "${green}Identified machine as K1C. Configuring printer.cfg for a K1C. ${white}\n"
 	    cp $PRINTER_CONF_DIR/k1/*.cfg $PRINTER_CONF_DIR/
 	    mv $PRINTER_CONF_DIR/printer_k1c.cfg $PRINTER_CONF_DIR/printer.cfg
 	    rm $PRINTER_CONF_DIR/printer_variant1.cfg
@@ -123,6 +129,8 @@ do_setup()
     # install initfile
     cp $CHROOT_DIR/etc/init/S00klipper_mod /etc/init.d/
     sync
+
+    printf "${green}Install complete. Double check your printer.cfg once rebooted. If you have physical mods, check your stepper_x/y rotation_distance and ensure they're correct based on your mod. ${white}\n"
 
     # update end image
     # --------------------------------

@@ -1,0 +1,82 @@
+#!/bin/sh
+#
+# Start camera stream after boot (manually trigger the mdev event)
+#
+set -x
+
+CAM_CONFIG=/root/printer_data/config/cam.cfg
+IP_ADDR=`ip route get 1 | awk '{print $NF;exit}'`
+
+start() {
+
+    for i in {1..5}; do
+	if [ ! -z "$IP_ADDR" ]; then
+	    break;
+	fi
+
+	sleep 1
+	IP_ADDR=`ip route get 1 | awk '{print $NF;exit}'`
+    done
+    
+    cat <<EOF > $CAM_CONFIG
+#####################################################################
+# DO NOT EDIT! CHANGES WILL BE OVERWRITTEN. If you want to configure
+# webcam via moonraker, either add them directly in moonraker.cfg or
+# as a different include.
+#####################################################################
+EOF
+
+    base_port=8080
+    for videodev in /dev/video*; do
+	if [ -e "$videodev" ]
+	then
+	    videoname=$(basename $videodev)
+            DEVNAME=$videoname ACTION="add" PORT=$base_port /usr/libexec/camera-autostart.sh
+	    if [ $? -ne 0 ]; then
+		continue
+	    fi
+
+	    cat <<EOF >> $CAM_CONFIG
+[webcam $videoname]
+enabled: True
+stream_url: http://$IP_ADDR:$base_port/stream
+snapshot_url: http://$IP_ADDR:$base_port/snapshot
+
+EOF
+	    base_port=$(($base_port+1))
+	fi
+    done
+}
+
+stop() {
+       for videodev in /dev/video*; do
+	if [ -e "$videodev" ]
+	then
+	    videoname=$(basename $videodev)
+            DEVNAME=$videoname ACTION="remove" /usr/libexec/camera-autostart.sh
+	fi
+    done
+}
+
+restart() {
+    stop
+    sleep 1
+    start
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart|reload)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?
