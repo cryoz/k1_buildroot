@@ -33,6 +33,7 @@ sh -c "$(wget --no-check-certificate -qO - https://raw.githubusercontent.com/bal
 - [Mainsail](https://docs.mainsail.xyz/) on port 4000
 - [Fluidd](https://docs.fluidd.xyz/) on port 4001
 - [Guppyscreen](https://github.com/ballaswag/guppyscreen) ‒ preview build variant
+- [GuppyFLO](https://github.com/ballaswag/guppyflo) ‒ Secure remote access via tailscale
 - Auto cameras streaming setup via [ustreamer](https://github.com/pikvm/ustreamer) on port 8080-8083
 - [Moonraker-timelapse](https://github.com/mainsail-crew/moonraker-timelapse) support
 - Network access: WiFi WPA Supplicant
