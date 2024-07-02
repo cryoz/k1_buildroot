@@ -1,0 +1,33 @@
+#!/bin/sh
+
+GUPPYFLO=/root/printer_software/guppyflo
+
+[ -f $GUPPYFLO/guppyflo.disabled ] && mv $GUPPYFLO/guppyflo.disabled $GUPPYFLO/guppyflo
+
+rm -rf $GUPPYFLO/guppyflo.log &> /dev/null
+
+/etc/init.d/S85guppyflo start &> /dev/null
+
+TS_AUTH_URL=$(grep -o -m 1 "https://login.tailscale.com/.*" $GUPPYFLO/guppyflo.log 2>/dev/null || echo "")
+
+for i in {1..5}; do
+    if [ ! -z "$TS_AUTH_URL" ]; then
+	printf "Open following Tailscale authenticaton URL to add this printer to your Tailscale network:\n\n"
+	printf "$TS_AUTH_URL\n\n"
+	printf "Enable Tailscale MagicDNS:\n\n"
+	printf "https://login.tailscale.com/admin/dns\n\n"
+	printf "Use following URLs to configure remote access on your tailscale clients\n\n"
+	printf "Printer URL/Moonraker Websocket URL:\n"
+	printf "ws://guppyflo/printers/1557981001/websocket\n\n"
+	printf "Camera URL:\n"
+	printf "http://guppyflo/printers/1557981001/cameras/231314625/stream\n\n"
+	printf "For detail GuppyFLO guide checkout the project page:\n"
+	printf "https://github.com/ballaswag/guppyflo?tab=readme-ov-file#mobileraker-via-tailscale\n\n"
+	break;
+    fi
+
+    sleep 1
+    TS_AUTH_URL=$(grep -o -m 1 "https://login.tailscale.com/.*" $GUPPYFLO/guppyflo.log 2>/dev/null || echo "")
+done
+
+exit 0

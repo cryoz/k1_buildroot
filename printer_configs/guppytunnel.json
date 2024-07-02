@@ -1,0 +1,19 @@
+{
+  "printers": [
+    {
+      "printer_name": "k1",
+      "moonraker_ip": "127.0.0.1",
+      "moonraker_port": 7125,
+      "cameras": [
+        {
+          "id": "231314625",
+          "path": "/stream",
+          "camera_ip": "127.0.0.1",
+          "camera_port": 8080,
+          "type": "mjpeg-stream"
+        }
+      ]
+    }
+  ],
+  "guppyflo_local_port": 9873
+}

@@ -27,7 +27,7 @@ rm -rf $TARGET_ROOT/root/printer_software/klipper
 rm -rf $TARGET_ROOT/root/printer_software/KlipperScreen
 rm -rf $TARGET_ROOT/root/printer_software/moonraker
 rm -rf $TARGET_ROOT/root/printer_software/web
-
+rm -rf $TARGET_ROOT/root/printer_software/guppyflo
 # save build time for fake-hwclock
 date -u '+%Y-%m-%d %H:%M:%S' > $TARGET_ROOT/etc/fake-hwclock.data
 
@@ -139,6 +139,7 @@ fi
 mkdir -p $TARGET_ROOT/root/printer_software/web/fluidd
 unzip $GIT_ROOT/prebuilt/fluidd.zip -d $TARGET_ROOT/root/printer_software/web/fluidd
 
+
 ##############################
 # install printer configs
 ##############################
@@ -147,6 +148,17 @@ log_info "Install printer configs"
 mkdir -p $TARGET_ROOT/root/printer_data/config
 mkdir -p $TARGET_ROOT/root/printer_data/logs
 cp -r $GIT_ROOT/printer_configs/* $TARGET_ROOT/root/printer_data/config/
+
+##############################
+# install guppyscreen
+##############################
+
+curl -L https://github.com/ballaswag/guppyflo/releases/latest/download/guppyflo_mipsle.zip -o $GIT_ROOT/prebuilt/guppyflo.zip
+mkdir -p $TARGET_ROOT/root/printer_software/guppyflo
+unzip $GIT_ROOT/prebuilt/guppyflo.zip -d $TARGET_ROOT/root/printer_software/guppyflo
+mv $TARGET_ROOT/root/printer_software/guppyflo/guppyflo $TARGET_ROOT/root/printer_software/guppyflo/guppyflo.disabled
+ln -sf /root/printer_data/config/guppytunnel.json $TARGET_ROOT/root/printer_software/guppyflo/guppytunnel.json
+
 
 ###############################
 # Fix dbus user if not present

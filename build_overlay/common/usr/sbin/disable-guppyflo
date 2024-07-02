@@ -1,0 +1,9 @@
+#!/bin/sh
+
+GUPPYFLO=/root/printer_software/guppyflo
+
+[ -f $GUPPYFLO/guppyflo ] && mv $GUPPYFLO/guppyflo $GUPPYFLO/guppyflo.disabled
+
+/etc/init.d/S85guppyflo stop
+
+exit 0
