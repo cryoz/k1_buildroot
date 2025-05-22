@@ -176,44 +176,6 @@ then
     echo "dbus:*:::::::" >> $TARGET_ROOT/etc/shadow
 fi
 
-##############################
-# Only for variant "klipperscreen"
-##############################
-
-if [ "$MOD_VARIANT" == "klipperscreen" ]
-then
-    ##############################
-    # install X11 scripts
-    ##############################
-    log_info "Install X11 requirements"
-    rm -f "$TARGET_ROOT/etc/ts.conf"
-    ln -fs /mnt/orig_root/opt/tslib-1.12/etc/pointercal "$TARGET_ROOT/etc/pointercal"
-    ln -fs /mnt/orig_root/opt/tslib-1.12/etc/ts.conf "$TARGET_ROOT/etc/ts.conf"
-
-    ##############################
-    # install klipperscreen
-    ##############################
-    log_info "Install Klipperscreen"
-
-    mkdir -p $TARGET_ROOT/root/printer_software/KlipperScreen/
-
-    if [ -f $GIT_ROOT/prebuilt/KlipperScreen-env.tar.xz ]
-    then
-      tar -xf $GIT_ROOT/prebuilt/KlipperScreen-env.tar.xz -C $TARGET_ROOT/root/printer_software/KlipperScreen/
-    else
-      mkdir -p $TARGET_ROOT/root/setup/
-      cp -r $GIT_ROOT/prebuilt/wheels/KlipperScreen_wheels $TARGET_ROOT/root/setup/
-      cat $GIT_ROOT/submodules/KlipperScreen/scripts/KlipperScreen-requirements.txt > $TARGET_ROOT/root/setup/KlipperScreen_wheels/requirements.txt
-    fi
-
-    # Python sources
-    mkdir -p $TARGET_DIR/root/printer_software/KlipperScreen
-    pushd $GIT_ROOT/submodules/KlipperScreen/
-    cp -r screen.py start.sh docs README.md LICENSE ks_includes panels styles scripts $TARGET_ROOT/root/printer_software/KlipperScreen/
-    create_version ./ > $TARGET_ROOT/root/printer_software/KlipperScreen/.version
-    popd
-fi
-
 if [ "$MOD_VARIANT" == "guppyscreen" ]
 then
     # files are in the overlay

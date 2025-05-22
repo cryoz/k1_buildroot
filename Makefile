@@ -4,7 +4,7 @@ BUILD := build_scripts/build.sh
 VARIANTS = lite klipperscreen guppyscreen
 
 all: packages checksums
-packages: sdk lite klipperscreen guppyscreen uninstall
+packages: sdk lite guppyscreen uninstall
 
 # SDK targets
 sdk: sdk_package

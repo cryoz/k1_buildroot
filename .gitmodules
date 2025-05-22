@@ -1,12 +1,13 @@
 [submodule "submodules/moonraker"]
 	path = submodules/moonraker
-	url = https://github.com/Arksine/moonraker
+	url = https://github.com/Arksine/moonraker.git
 [submodule "submodules/buildroot"]
 	path = submodules/buildroot
-	url = https://github.com/ballaswag/k1_mod_buildroot_chroot.git
+	url = https://github.com/cryoz/k1_mod_buildroot_chroot.git
+	branch = k1-main
 [submodule "submodules/klipper"]
 	path = submodules/klipper
-    url = https://github.com/ballaswag/klipper.git
-[submodule "submodules/KlipperScreen"]
-	path = submodules/KlipperScreen
-	url = git@github.com:consp/KlipperScreen.git
+	url = https://github.com/cryoz/klipper.git
+[submodule "submodules/kalico"]
+	path = submodules/kalico
+	url = https://github.com/cryoz/k1-kalico.git

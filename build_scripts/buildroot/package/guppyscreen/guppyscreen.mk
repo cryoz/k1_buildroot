@@ -5,7 +5,7 @@
 ################################################################################
 
 GUPPYSCREEN_VERSION = origin/main
-GUPPYSCREEN_SITE = "git@github.com:ballaswag/guppyscreen.git"
+GUPPYSCREEN_SITE = "git@github.com:neonman63/guppyscreen.git"
 GUPPYSCREEN_SITE_METHOD = git
 GUPPYSCREEN_GIT_SUBMODULES = yes
 GUPPYSCREEN_LICENSE = GPL-3.0+
